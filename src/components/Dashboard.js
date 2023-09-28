@@ -29,7 +29,8 @@ const data = [
 ];
 class Dashboard extends Component {
   state = {
-    loading: false
+    loading: false,
+    focused: null
   };
 
   render() {
@@ -39,7 +40,7 @@ class Dashboard extends Component {
       return <Loading />;
     }
   // Map over the data array and create Panel components for each item
-  const panelElements = data.map((panel) => (
+  const panelElements =  (this.state.focused ? data.filter(panel => this.state.focused === panel.id) : data).map((panel) => (
     <Panel
       key={panel.id}
       id={panel.id}
