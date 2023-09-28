@@ -29,7 +29,7 @@ const data = [
 ];
 class Dashboard extends Component {
   state = {
-    loading: true
+    loading: false
   };
 
   render() {
@@ -38,8 +38,18 @@ class Dashboard extends Component {
     if (this.state.loading) {
       return <Loading />;
     }
+  // Map over the data array and create Panel components for each item
+  const panelElements = data.map((panel) => (
+    <Panel
+      key={panel.id}
+      id={panel.id}
+      label={panel.label}
+      value={panel.value}
+    />
+  ));
 
-    return <main className={dashboardClasses} />;
+  return <main className={dashboardClasses}>{panelElements}</main>;
+
   }
 }
 
