@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Loading from "./Loading";
 import classnames from "classnames";
-import Panel from "./Panel"
+import Panel from "./Panel";
 
 
 //fake data
@@ -45,6 +45,20 @@ class Dashboard extends Component {
   componentDidMount() {
     const focused = JSON.parse(localStorage.getItem("focused"));
 
+    const urlsPromise = [
+      "/api/photos",
+      "/api/topics",
+    ].map(url => fetch(url).then(response => response.json()));
+
+    Promise.all(urlsPromise)
+      .then(([photos, topics]) => {
+        this.setState({
+          loading: false,
+          photos: photos,
+          topics: topics
+        });
+      });
+
     if (focused) {
       this.setState({ focused });
     }
@@ -57,24 +71,25 @@ class Dashboard extends Component {
   }
 
   render() {
+    // console.log(this.state)
     const dashboardClasses = classnames("dashboard",
-    {"dashboard--focused": this.state.focused});
+      { "dashboard--focused": this.state.focused });
 
     if (this.state.loading) {
       return <Loading />;
     }
-  // Map over the data array and create Panel components for each item
-  const panelElements =  (this.state.focused ? data.filter(panel => this.state.focused === panel.id) : data).map((panel) => (
-    <Panel
-      key={panel.id}
+    // Map over the data array and create Panel components for each item
+    const panelElements = (this.state.focused ? data.filter(panel => this.state.focused === panel.id) : data).map((panel) => (
+      <Panel
+        key={panel.id}
 
-      label={panel.label}
-      value={panel.value}
-      onSelect={event => this.selectPanel(panel.id)}
-    />
-  ));
+        label={panel.label}
+        value={panel.value}
+        onSelect={event => this.selectPanel(panel.id)}
+      />
+    ));
 
-  return <main className={dashboardClasses}>{panelElements}</main>;
+    return <main className={dashboardClasses}>{panelElements}</main>;
 
   }
 }
