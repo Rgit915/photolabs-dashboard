@@ -35,10 +35,10 @@ class Dashboard extends Component {
 
   //Function take id and set state of focused
   selectPanel(id) {
-    this.setState({
-     focused: id
-    });
-   }
+    this.setState(previousState => ({
+      focused: previousState.focused !== null ? null : id
+    }));
+  }
 
   render() {
     const dashboardClasses = classnames("dashboard",
