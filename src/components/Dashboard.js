@@ -3,7 +3,14 @@ import Loading from "./Loading";
 import classnames from "classnames";
 import Panel from "./Panel";
 
-
+//import helper functions
+import {
+  getTotalPhotos,
+  getTotalTopics,
+  getUserWithMostUploads,
+  getUserWithLeastUploads
+ } from "helpers/selectors";
+ 
 //fake data
 const data = [
   {
