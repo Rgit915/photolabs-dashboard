@@ -9,7 +9,7 @@ import {
   getTotalTopics,
   getUserWithMostUploads,
   getUserWithLeastUploads
- } from "helpers/selectors";
+} from "helpers/selectors";
 
 //fake data
 const data = [
@@ -92,10 +92,9 @@ class Dashboard extends Component {
     const panelElements = (this.state.focused ? data.filter(panel => this.state.focused === panel.id) : data).map((panel) => (
       <Panel
         key={panel.id}
-
         label={panel.label}
-        value={panel.value}
-        onSelect={event => this.selectPanel(panel.id)}
+        value={panel.getValue(this.state)}
+        onSelect={() => this.selectPanel(panel.id)}
       />
     ));
 
