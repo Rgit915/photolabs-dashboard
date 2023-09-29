@@ -29,8 +29,10 @@ const data = [
 ];
 class Dashboard extends Component {
   state = {
-    loading: false,
-    focused: null
+    loading: true,
+    focused: null,
+    photos: [],
+    topics: []
   };
 
   //Function take id and set state of focused
@@ -39,7 +41,7 @@ class Dashboard extends Component {
       focused: previousState.focused !== null ? null : id
     }));
   }
-  
+
   componentDidMount() {
     const focused = JSON.parse(localStorage.getItem("focused"));
 
