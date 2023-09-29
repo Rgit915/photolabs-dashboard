@@ -10,30 +10,33 @@ import {
   getUserWithMostUploads,
   getUserWithLeastUploads
  } from "helpers/selectors";
- 
+
 //fake data
 const data = [
   {
     id: 1,
     label: "Total Photos",
-    value: 10
+    getValue: getTotalPhotos
   },
   {
     id: 2,
     label: "Total Topics",
-    value: 4
+    getValue: getTotalTopics
   },
   {
     id: 3,
     label: "User with the most uploads",
-    value: "Allison Saeng"
+    getValue: getUserWithMostUploads
   },
   {
     id: 4,
     label: "User with the least uploads",
-    value: "Lukas Souza"
-  },
+    getValue: getUserWithLeastUploads
+  }
+
 ];
+
+
 class Dashboard extends Component {
   state = {
     loading: true,
